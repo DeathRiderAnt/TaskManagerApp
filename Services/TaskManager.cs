@@ -14,6 +14,17 @@ public class TaskManager
         _tasks.Add(new TaskItem(name));
     }
 
+    public bool MarkComplete(int index)
+    {
+        if (index >= 0 && index < _tasks.Count)
+        {
+            _tasks[index].MarkComplete();
+            return true;
+        }
+        return false;
+
+    }
+
     public IReadOnlyList<TaskItem> GetTasks() => _tasks.AsReadOnly();
 
 }
