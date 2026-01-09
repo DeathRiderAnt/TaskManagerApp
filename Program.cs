@@ -25,7 +25,21 @@ while(running)
             Console.WriteLine("Option not available yet\n");
             break;
         case "2":
-            Console.WriteLine("Option not available yet\n");
+            var tasks = manager.GetTasks();
+
+            if(tasks.Count == 0)
+            {
+                Console.WriteLine("No tasks yet!");
+            }
+            else
+            {
+                for(int i = 0; i < tasks.Count; i++)
+                {
+                    var task = tasks[i];
+                    var statusSymbol = task.IsComplete ? "[X]" : "[ ]";
+                    Console.WriteLine($"{i + 1}. {statusSymbol} {task.TaskName}\n");
+                }
+            }
             break;
         case "3":
             Console.WriteLine("Option not available yet\n");
@@ -48,10 +62,3 @@ while(running)
 // manager.AddTask("Mark the first task as complete");
 
 // manager.MarkComplete(0);
-
-// var tasks = manager.GetTasks();
-
-// foreach (var task in tasks)
-// {
-//     Console.WriteLine($"Task: {task.TaskName}, Completed: {task.IsComplete}");
-// }
