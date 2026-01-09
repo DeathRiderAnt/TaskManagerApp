@@ -9,7 +9,7 @@ bool running = true;
 
 while(running)
 {
-    
+
     Console.WriteLine("Please choose an option:\n");
     Console.WriteLine("1. Add Task\n");
     Console.WriteLine("2. List Tasks\n");
@@ -22,7 +22,17 @@ while(running)
     switch(input)
     {
         case "1":
-            Console.WriteLine("Option not available yet\n");
+            Console.WriteLine("What task would you like to add?\n");
+
+            var taskToAdd = Console.ReadLine();
+
+            if(string.IsNullOrWhiteSpace(taskToAdd))
+                Console.WriteLine("Please enter a valid task next time!");
+            else
+            {
+                manager.AddTask(taskToAdd);
+                Console.WriteLine($"The task '{taskToAdd}' was added successfully!");
+            }
             break;
         case "2":
             var tasks = manager.GetTasks();
