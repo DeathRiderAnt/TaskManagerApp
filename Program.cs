@@ -82,8 +82,36 @@ while(running)
             }
             break;}
         case "4":
-            Console.WriteLine("Option not available yet\n");
-            break;
+            {var tasks = manager.GetTasks();
+
+            if(tasks.Count == 0)
+            {
+                Console.WriteLine("No tasks to delete!");
+            }
+            else
+            {
+                for(int i = 0; i < tasks.Count; i++)
+                {
+                    var task = tasks[i];
+                    var statusSymbol = task.IsComplete ? "[X]" : "[ ]";
+                    Console.WriteLine($"{i + 1}. {statusSymbol} {task.TaskName}\n");
+                }
+                Console.WriteLine("Please choose a task to delete\n");
+                var taskToDelete = Console.ReadLine();
+
+                if(int.TryParse(taskToDelete, out int taskNumber))
+                    {
+                        int index = taskNumber - 1;
+                        var deletedTask = tasks[index].TaskName;
+                        manager.DeleteTask(index);
+                        Console.WriteLine($"{deletedTask} has been deleted!\n");
+                    }
+                else
+                    {
+                        Console.WriteLine("Please enter a valid number.");
+                    }
+            }
+            break;}
         case "5":
             Console.WriteLine("Thank you for using the Task Manager!");
             running = false;

@@ -27,6 +27,16 @@ public class TaskManager
 
     public IReadOnlyList<TaskItem> GetTasks() => _tasks.AsReadOnly();
 
+    public bool DeleteTask(int index)
+    {
+        if (index >= 0 && index < _tasks.Count)
+        {
+            _tasks.RemoveAt(index);
+            return true;
+        }
+        return false;
+    }
+
 }
 
 // Adds a new task using the provided title
