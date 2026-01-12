@@ -22,7 +22,7 @@ while(running)
     switch(input)
     {
         case "1":
-            Console.WriteLine("What task would you like to add?\n");
+            {Console.WriteLine("What task would you like to add?\n");
 
             var taskToAdd = Console.ReadLine();
 
@@ -33,9 +33,9 @@ while(running)
                 manager.AddTask(taskToAdd);
                 Console.WriteLine($"The task '{taskToAdd}' was added successfully!");
             }
-            break;
+            break;}
         case "2":
-            var tasks = manager.GetTasks();
+           {var tasks = manager.GetTasks();
 
             if(tasks.Count == 0)
             {
@@ -50,10 +50,37 @@ while(running)
                     Console.WriteLine($"{i + 1}. {statusSymbol} {task.TaskName}\n");
                 }
             }
-            break;
+            break;}
         case "3":
-            Console.WriteLine("Option not available yet\n");
-            break;
+            {var tasks = manager.GetTasks();
+
+            if(tasks.Count == 0)
+            {
+                Console.WriteLine("No tasks yet!");
+            }
+            else
+            {
+                for(int i = 0; i < tasks.Count; i++)
+                {
+                    var task = tasks[i];
+                    var statusSymbol = task.IsComplete ? "[X]" : "[ ]";
+                    Console.WriteLine($"{i + 1}. {statusSymbol} {task.TaskName}\n");
+                }
+                Console.WriteLine("Please choose a task to mark as complete\n");
+                var taskToMark = Console.ReadLine();
+
+                if(int.TryParse(taskToMark, out int taskNumber))
+                    {
+                        int index = taskNumber - 1;
+                        manager.MarkComplete(index);
+                        Console.WriteLine($"{tasks[index].TaskName} has been marked as complete!\n");
+                    }
+                else
+                    {
+                        Console.WriteLine("Please enter a valid number.");
+                    }
+            }
+            break;}
         case "4":
             Console.WriteLine("Option not available yet\n");
             break;
@@ -67,8 +94,3 @@ while(running)
 
     }
 }
-
-// manager.AddTask("Create an instance of TaskManager");
-// manager.AddTask("Mark the first task as complete");
-
-// manager.MarkComplete(0);
