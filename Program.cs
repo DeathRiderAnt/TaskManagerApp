@@ -37,35 +37,12 @@ while(running)
         case "2":
            {var tasks = manager.GetTasks();
 
-            if(tasks.Count == 0)
-            {
-                Console.WriteLine("No tasks yet!");
-            }
-            else
-            {
-                for(int i = 0; i < tasks.Count; i++)
-                {
-                    var task = tasks[i];
-                    var statusSymbol = task.IsComplete ? "[X]" : "[ ]";
-                    Console.WriteLine($"{i + 1}. {statusSymbol} {task.TaskName}\n");
-                }
-            }
+            DisplayTasks(tasks);
             break;}
         case "3":
             {var tasks = manager.GetTasks();
 
-            if(tasks.Count == 0)
-            {
-                Console.WriteLine("No tasks yet!");
-            }
-            else
-            {
-                for(int i = 0; i < tasks.Count; i++)
-                {
-                    var task = tasks[i];
-                    var statusSymbol = task.IsComplete ? "[X]" : "[ ]";
-                    Console.WriteLine($"{i + 1}. {statusSymbol} {task.TaskName}\n");
-                }
+            DisplayTasks(tasks);
                 Console.WriteLine("Please choose a task to mark as complete\n");
                 var taskToMark = Console.ReadLine();
 
@@ -80,22 +57,11 @@ while(running)
                         Console.WriteLine("Please enter a valid number.");
                     }
             }
-            break;}
+            break;
         case "4":
             {var tasks = manager.GetTasks();
 
-            if(tasks.Count == 0)
-            {
-                Console.WriteLine("No tasks to delete!");
-            }
-            else
-            {
-                for(int i = 0; i < tasks.Count; i++)
-                {
-                    var task = tasks[i];
-                    var statusSymbol = task.IsComplete ? "[X]" : "[ ]";
-                    Console.WriteLine($"{i + 1}. {statusSymbol} {task.TaskName}\n");
-                }
+            DisplayTasks(tasks);
                 Console.WriteLine("Please choose a task to delete\n");
                 var taskToDelete = Console.ReadLine();
 
@@ -111,7 +77,7 @@ while(running)
                         Console.WriteLine("Please enter a valid number.");
                     }
             }
-            break;}
+            break;
         case "5":
             Console.WriteLine("Thank you for using the Task Manager!");
             running = false;
@@ -122,3 +88,20 @@ while(running)
 
     }
 }
+
+void DisplayTasks(IReadOnlyList<TaskItem> tasks)
+    {
+        if(tasks.Count == 0)
+            {
+                Console.WriteLine("No tasks yet!");
+            }
+            else
+            {
+                for(int i = 0; i < tasks.Count; i++)
+                {
+                    var task = tasks[i];
+                    var statusSymbol = task.IsComplete ? "[X]" : "[ ]";
+                    Console.WriteLine($"{i + 1}. {statusSymbol} {task.TaskName}\n");
+                }
+            }
+    }
